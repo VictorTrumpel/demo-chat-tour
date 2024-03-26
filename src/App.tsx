@@ -1,5 +1,4 @@
 import { FloatButton, Popover } from 'antd';
-import { ConcernTagSelector } from './feature/ConcernTagSelector';
 import { ChatContent } from './widget/ChatContent/ChatContent';
 import './App.scss';
 
