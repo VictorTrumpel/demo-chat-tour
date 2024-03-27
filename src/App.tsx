@@ -11,7 +11,7 @@ export const App = () => {
         content={<ChatContent />}
         rootClassName='concern-chat-popover'
       >
-        <FloatButton className='chat-float-btn' icon={<img src='/admin.png' alt='' />} />
+        <FloatButton className='chat-float-btn' icon={<img src='./admin.png' alt='' />} />
       </Popover>
     </>
   );
