@@ -37,6 +37,13 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .concern-form-space {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 button {
   border: none;
   background: none;

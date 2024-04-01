@@ -4,6 +4,8 @@ import { Progress } from 'antd';
 import { DateSelector } from '../../feature';
 import { CommunitySelector } from '../../feature';
 import { ConcernStateType } from '../../model/concernSlice';
+import { TourList } from '../../feature';
+import { CloseButton } from '../../shared/ui/CloseButton/CloseButton';
 import './ConcernForm.scss';
 
 const persentValueOfStep: { [p in ConcernStateType['currentStep']]: number } = {
@@ -13,7 +15,7 @@ const persentValueOfStep: { [p in ConcernStateType['currentStep']]: number } = {
   'result-page': 100,
 };
 
-export const ConcernForm = () => {
+export const ConcernForm = ({ handleClose }: { handleClose: () => void }) => {
   const currentStep = useTSelector((state) => state.concern.currentStep);
 
   return (
@@ -29,9 +31,13 @@ export const ConcernForm = () => {
         trailColor='#62C55433'
         strokeColor='#62C554'
       />
+
+      <CloseButton onClick={handleClose} />
+
       {currentStep === 'select-tag' && <ConcernTagSelector />}
       {currentStep === 'select-date' && <DateSelector />}
       {currentStep === 'select-community' && <CommunitySelector />}
+      {currentStep === 'result-page' && <TourList />}
     </div>
   );
 };

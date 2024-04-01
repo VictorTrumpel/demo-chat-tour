@@ -1,50 +1,39 @@
-import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
-import { Timeline, TimelineItemProps, Card, Button, Space } from 'antd';
-import { useMemo } from 'react';
-import { interests } from '../../shared/constants/interests';
+import { mockCard } from '../../shared/constants/mockCard';
+import { SaleCard } from '../../entities/SaleCard/SaleCard';
+import { Button } from 'antd';
+import { ShareIcon } from '../../shared/icons/ShareIcon';
+
 import './TourList.scss';
-
-const interestsMap = new Map<string, (typeof interests)[number]>();
-
-interests.forEach((int) => interestsMap.set(int.value, int));
-
-const { Meta } = Card;
+import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
 
 export const TourList = () => {
-  const { checkedConcernTags, handleSelectPage } = useConcernFormViewModel();
+  const { handleSelectStep } = useConcernFormViewModel();
 
-  const handleClickOnBackBtn = () => {
-    handleSelectPage();
+  const handleClickBtnBack = () => {
+    handleSelectStep('select-tag');
   };
 
-  const points: TimelineItemProps[] = useMemo(() => {
-    return checkedConcernTags.map((tag, idx) => ({
-      children: (
-        <Card
-          hoverable
-          style={{ width: 270 }}
-          cover={<img alt='example' src={interestsMap.get(tag)?.imgUrl} />}
-          actions={[
-            <>{11 + idx}:00</>,
-            <Button type='link' size='small'>
-              {interestsMap.get(tag)?.actionTitle}
-            </Button>,
-          ]}
-        >
-          <Meta title={interestsMap.get(tag)?.title} description='www.some-link.com' />
-        </Card>
-      ),
-    }));
-  }, [checkedConcernTags]);
-
   return (
-    <Space>
-      <div className='timeline-container'>
-        <Timeline items={points} />
+    <div className='tour-space concern-form-space'>
+      <h4>Подобрали 3 самых интересных варианта!</h4>
+      <h5>Посмтреть автомобили и поесть бургеров с детьми</h5>
+
+      <div className='card-list'>
+        {mockCard.map(({ id, title, imgUrl, address, price }) => (
+          <SaleCard key={id} imgUrl={imgUrl} title={title} address={address} price={price} />
+        ))}
       </div>
-      <Button className='back-btn' onClick={handleClickOnBackBtn}>
-        Назад
+
+      <div className='action-button-panel'>
+        <Button type='text'>Другие варианты</Button>
+        <Button type='text'>
+          Поделиться <ShareIcon />
+        </Button>
+      </div>
+
+      <Button onClick={handleClickBtnBack} className='back-to-start-btn' type='text'>
+        Вернуться к началу
       </Button>
-    </Space>
+    </div>
   );
 };
