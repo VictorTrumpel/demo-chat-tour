@@ -3,6 +3,7 @@ import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput
 import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
 import { Calendar } from '../../shared/ui/Calendar/Calendar';
 import { InputProps } from 'antd';
+//@ts-ignore
 import dayjs from 'dayjs';
 import './DateSelector.scss';
 
@@ -26,6 +27,10 @@ export const DateSelector = () => {
 
   const handleTypeDatePromt: InputProps['onChange'] = (event) => {
     handleChangeDatePromt(event.target.value);
+  };
+
+  const handleGoNextToCommunity = () => {
+    handleSelectStep('select-community');
   };
 
   return (
@@ -55,6 +60,9 @@ export const DateSelector = () => {
           placeholder: 'Можете уточнить время тут...',
           value: datePromt,
           onChange: handleTypeDatePromt,
+        }}
+        buttonProps={{
+          onClick: handleGoNextToCommunity,
         }}
       />
     </div>

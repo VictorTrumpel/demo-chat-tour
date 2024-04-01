@@ -2,6 +2,7 @@ import { useTSelector } from '../../shared/hooks/useTSelector';
 import { ConcernTagSelector } from '../../feature';
 import { Progress } from 'antd';
 import { DateSelector } from '../../feature';
+import { CommunitySelector } from '../../feature';
 import './ConcernForm.scss';
 
 export const ConcernForm = () => {
@@ -22,6 +23,7 @@ export const ConcernForm = () => {
       />
       {currentStep === 'select-tag' && <ConcernTagSelector />}
       {currentStep === 'select-date' && <DateSelector />}
+      {currentStep === 'select-community' && <CommunitySelector />}
     </div>
   );
 };
