@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { concernSliceReducer } from '../model/concernSlice';
-import { appSliceReducer } from './model/appSlice';
+import { concernSliceReducer } from './concernSlice';
 
 export const store = configureStore({
   reducer: {
     concern: concernSliceReducer,
-    app: appSliceReducer,
   },
 });
 
