@@ -1,7 +1,7 @@
-import { useTourListViewModel } from '../TourListViewModel/TourListViewModel';
-import { Timeline, TimelineItemProps, Card, Button } from 'antd';
+import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
+import { Timeline, TimelineItemProps, Card, Button, Space } from 'antd';
 import { useMemo } from 'react';
-import { interests } from '../../../shared/constants/interests';
+import { interests } from '../../shared/constants/interests';
 import './TourList.scss';
 
 const interestsMap = new Map<string, (typeof interests)[number]>();
@@ -11,7 +11,11 @@ interests.forEach((int) => interestsMap.set(int.value, int));
 const { Meta } = Card;
 
 export const TourList = () => {
-  const { checkedConcernTags, handleBackToCheckConcern } = useTourListViewModel();
+  const { checkedConcernTags, handleSelectPage } = useConcernFormViewModel();
+
+  const handleClickOnBackBtn = () => {
+    handleSelectPage();
+  };
 
   const points: TimelineItemProps[] = useMemo(() => {
     return checkedConcernTags.map((tag, idx) => ({
@@ -34,16 +38,13 @@ export const TourList = () => {
   }, [checkedConcernTags]);
 
   return (
-    <div className='chat-window tour-list'>
+    <Space>
       <div className='timeline-container'>
         <Timeline items={points} />
       </div>
-      <Button
-        className='back-btn'
-        onClick={handleBackToCheckConcern}
-      >
+      <Button className='back-btn' onClick={handleClickOnBackBtn}>
         Назад
       </Button>
-    </div>
+    </Space>
   );
 };

@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-type ConcernState = {
+export type ConcernStateType = {
+  currentStep: 'select-tag' | 'select-date';
   checkedTags: string[];
 };
 
-const initialState: ConcernState = {
+const initialState: ConcernStateType = {
+  currentStep: 'select-tag',
   checkedTags: [],
 };
 
@@ -31,6 +33,11 @@ export const concernSlice = createSlice({
       concernSet.delete(concernTag);
 
       state.checkedTags = [...concernSet];
+    },
+
+    setCurrentStep: (state, payload: PayloadAction<ConcernStateType['currentStep']>) => {
+      const { payload: step } = payload;
+      state.currentStep = step;
     },
   },
 });

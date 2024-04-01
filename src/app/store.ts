@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { concernSliceReducer } from '../feature/ConcernTagSelector/model/concernSlice';
+import { concernSliceReducer } from '../model/concernSlice';
 import { appSliceReducer } from './model/appSlice';
 
 export const store = configureStore({
