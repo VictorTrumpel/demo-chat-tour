@@ -2,13 +2,30 @@ import { TagSpace } from '../../shared/ui/TagSpace/TagSpace';
 import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput';
 import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
 import { Calendar } from '../../shared/ui/Calendar/Calendar';
+import { InputProps } from 'antd';
+import dayjs from 'dayjs';
 import './DateSelector.scss';
 
 export const DateSelector = () => {
-  const { checkedConcernTags, handleSelectStep } = useConcernFormViewModel();
+  const {
+    checkedConcernTags,
+    handleSelectStep,
+    date,
+    handleSelectDate,
+    handleChangeDatePromt,
+    datePromt,
+  } = useConcernFormViewModel();
 
   const handleGaBackToTags = () => {
     handleSelectStep('select-tag');
+  };
+
+  const handleDateChange = (date: string) => {
+    handleSelectDate(date);
+  };
+
+  const handleTypeDatePromt: InputProps['onChange'] = (event) => {
+    handleChangeDatePromt(event.target.value);
   };
 
   return (
@@ -28,9 +45,18 @@ export const DateSelector = () => {
         <h5>А еще можете уточнить время в сообщении</h5>
       </div>
 
-      <Calendar />
+      <Calendar
+        value={dayjs(date, 'DD.MM.YYYY')}
+        onChange={(date) => handleDateChange(date.format('DD.MM.YYYY'))}
+      />
 
-      <NextSubmitInput inputProps={{ placeholder: 'Можете уточнить время тут...' }} />
+      <NextSubmitInput
+        inputProps={{
+          placeholder: 'Можете уточнить время тут...',
+          value: datePromt,
+          onChange: handleTypeDatePromt,
+        }}
+      />
     </div>
   );
 };

@@ -1,14 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 export type ConcernStateType = {
   currentStep: 'select-tag' | 'select-date';
+  interestPromt: string;
   checkedTags: string[];
+  date: string;
+  datePromt: string;
 };
 
 const initialState: ConcernStateType = {
   currentStep: 'select-tag',
+  interestPromt: '',
   checkedTags: [],
+  date: dayjs(new Date()).format('MM.DD.YYYY'),
+  datePromt: '',
 };
 
 export const concernSlice = createSlice({
@@ -38,6 +45,18 @@ export const concernSlice = createSlice({
     setCurrentStep: (state, payload: PayloadAction<ConcernStateType['currentStep']>) => {
       const { payload: step } = payload;
       state.currentStep = step;
+    },
+
+    setInterestPromt: (state, payload: PayloadAction<string>) => {
+      state.interestPromt = payload.payload;
+    },
+
+    setDate: (state, payload: PayloadAction<string>) => {
+      state.date = payload.payload;
+    },
+
+    setDatePromt: (state, payload: PayloadAction<string>) => {
+      state.datePromt = payload.payload;
     },
   },
 });

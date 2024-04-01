@@ -1,3 +1,4 @@
+import { InputProps } from 'antd';
 import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
 import { interests } from '../../shared/constants/interests';
 import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput';
@@ -7,8 +8,14 @@ import './ConcernTagSelector.scss';
 const tags = interests.map((t) => t.label);
 
 export const ConcernTagSelector = () => {
-  const { checkedConcernTags, handleSelectTag, handleUnselectTag, handleSelectStep } =
-    useConcernFormViewModel();
+  const {
+    checkedConcernTags,
+    handleSelectTag,
+    handleUnselectTag,
+    handleSelectStep,
+    interestPromt,
+    handleChangeInterestPromt,
+  } = useConcernFormViewModel();
 
   const handleClickTag = (tag: string) => {
     const hasAlreadyChecked = checkedConcernTags.includes(tag);
@@ -25,6 +32,10 @@ export const ConcernTagSelector = () => {
     handleSelectStep('select-date');
   };
 
+  const handleTypeText: InputProps['onChange'] = (event) => {
+    handleChangeInterestPromt(event.target.value);
+  };
+
   return (
     <div className='concern-space concern-form-space'>
       <h4>Интересует что-то конкретное?</h4>
@@ -33,7 +44,11 @@ export const ConcernTagSelector = () => {
       <TagSpace checkedTags={checkedConcernTags} tags={tags} handleClickTag={handleClickTag} />
 
       <NextSubmitInput
-        inputProps={{ placeholder: 'Или введите свой вариант' }}
+        inputProps={{
+          placeholder: 'Или введите свой вариант',
+          value: interestPromt,
+          onChange: handleTypeText,
+        }}
         buttonProps={{ disabled: checkedConcernTags.length == 0, onClick: handleSubmitTags }}
       />
     </div>

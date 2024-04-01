@@ -4,6 +4,11 @@
   box-shadow: 0px 4px 30px 0px #94949440;
   padding: 16px;
 
+  thead tr th:nth-child(6),
+  thead tr th:nth-child(7) {
+    color: #cca500;
+  }
+
   .ant-select {
     border: none;
   }
