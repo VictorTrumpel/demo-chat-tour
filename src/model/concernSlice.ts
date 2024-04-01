@@ -4,12 +4,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
 export type ConcernStateType = {
-  currentStep: 'select-tag' | 'select-date' | 'select-community';
+  currentStep: 'select-tag' | 'select-date' | 'select-community' | 'result-page';
   interestPromt: string;
   checkedConcernTags: string[];
   date: string;
   datePromt: string;
   checkedCommunityTags: string[];
+  communityPromt: string;
 };
 
 const initialState: ConcernStateType = {
@@ -19,6 +20,7 @@ const initialState: ConcernStateType = {
   date: dayjs(new Date()).format('DD.MM.YYYY'),
   datePromt: '',
   checkedCommunityTags: [],
+  communityPromt: '',
 };
 
 export const concernSlice = createSlice({
@@ -80,6 +82,10 @@ export const concernSlice = createSlice({
       communitySet.delete(communityTag);
 
       state.checkedCommunityTags = [...communitySet];
+    },
+
+    setCommunityPromt: (state, payload: PayloadAction<string>) => {
+      state.communityPromt = payload.payload;
     },
   },
 });

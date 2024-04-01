@@ -10,6 +10,7 @@ const persentValueOfStep: { [p in ConcernStateType['currentStep']]: number } = {
   'select-tag': 25,
   'select-date': 50,
   'select-community': 75,
+  'result-page': 100,
 };
 
 export const ConcernForm = () => {

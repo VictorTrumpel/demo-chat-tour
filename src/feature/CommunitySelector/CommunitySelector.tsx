@@ -2,6 +2,7 @@ import { TagSpace } from '../../shared/ui/TagSpace/TagSpace';
 import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
 import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput';
 import { communities } from '../../shared/constants/communities';
+import { InputProps } from 'antd';
 import './CommunitySelector.scss';
 
 export const CommunitySelector = () => {
@@ -9,12 +10,13 @@ export const CommunitySelector = () => {
     checkedConcernTags,
     handleSelectStep,
     date,
-    handleSelectDate,
-    handleChangeDatePromt,
     datePromt,
+    communityPromt,
     communityTags,
     handleSelectCommunityTag,
     handleUnselectCommunityTag,
+    handleChangeCommunityPromt,
+    fetchTheSelection,
   } = useConcernFormViewModel();
 
   const handleGaBackToTags = () => {
@@ -34,6 +36,10 @@ export const CommunitySelector = () => {
     }
 
     handleSelectCommunityTag(tag);
+  };
+
+  const handleTypeCommunityPromt: InputProps['onChange'] = (event) => {
+    handleChangeCommunityPromt(event.target.value);
   };
 
   return (
@@ -77,7 +83,16 @@ export const CommunitySelector = () => {
 
       <div className='divider' />
 
-      <NextSubmitInput inputProps={{ placeholder: 'Или введите свой вариант' }} />
+      <NextSubmitInput
+        inputProps={{
+          placeholder: 'Или введите свой вариант',
+          value: communityPromt,
+          onChange: handleTypeCommunityPromt,
+        }}
+        buttonProps={{
+          onClick: fetchTheSelection,
+        }}
+      />
     </div>
   );
 };

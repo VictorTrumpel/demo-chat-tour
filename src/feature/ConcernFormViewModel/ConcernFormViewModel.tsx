@@ -12,6 +12,7 @@ type ConcernViewModelType = {
   date: CalendarProps<any>['value'];
   datePromt: string;
   communityTags: string[];
+  communityPromt: string;
 
   handleSelectTag(tag: string): void;
   handleUnselectTag(tag: string): void;
@@ -21,6 +22,8 @@ type ConcernViewModelType = {
   handleChangeDatePromt(text: string): void;
   handleSelectCommunityTag(text: string): void;
   handleUnselectCommunityTag(text: string): void;
+  fetchTheSelection(): void;
+  handleChangeCommunityPromt(text: string): void;
 };
 
 export const ConcernViewModelContext = createContext<ConcernViewModelType | null>(null);
@@ -34,15 +37,20 @@ const {
   setDatePromt,
   addCommunityTag,
   deleteCommunityTag,
+  setCommunityPromt,
 } = concernSliceActions;
 
 export const ConcernFormViewModel = ({ children }: { children: ReactNode }) => {
-  const checkedConcernTags = useTSelector((state) => state.concern.checkedConcernTags);
   const currentStep = useTSelector((state) => state.concern.currentStep);
+
+  const checkedConcernTags = useTSelector((state) => state.concern.checkedConcernTags);
   const interestPromt = useTSelector((state) => state.concern.interestPromt);
+
   const date = useTSelector((state) => state.concern.date);
   const datePromt = useTSelector((state) => state.concern.datePromt);
+
   const communityTags = useTSelector((state) => state.concern.checkedCommunityTags);
+  const communityPromt = useTSelector((state) => state.concern.communityPromt);
 
   const dispatch = useTDispatch();
 
@@ -78,6 +86,23 @@ export const ConcernFormViewModel = ({ children }: { children: ReactNode }) => {
     dispatch(deleteCommunityTag(tag));
   };
 
+  const handleChangeCommunityPromt = (text: string) => {
+    dispatch(setCommunityPromt(text));
+  };
+
+  const fetchTheSelection = () => {
+    dispatch(setCurrentStep('result-page'));
+
+    console.log('payload :>> ', {
+      checkedConcernTags,
+      interestPromt,
+      date,
+      datePromt,
+      communityTags,
+      communityPromt,
+    });
+  };
+
   return (
     <ConcernViewModelContext.Provider
       value={{
@@ -87,6 +112,7 @@ export const ConcernFormViewModel = ({ children }: { children: ReactNode }) => {
         date,
         datePromt,
         communityTags,
+        communityPromt,
 
         handleSelectTag,
         handleUnselectTag,
@@ -96,6 +122,8 @@ export const ConcernFormViewModel = ({ children }: { children: ReactNode }) => {
         handleChangeDatePromt,
         handleSelectCommunityTag,
         handleUnselectCommunityTag,
+        fetchTheSelection,
+        handleChangeCommunityPromt,
       }}
     >
       {children}
