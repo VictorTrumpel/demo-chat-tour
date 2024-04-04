@@ -38,6 +38,7 @@ export const TourList = () => {
   };
 
   useEffect(() => {
+    console.log('isFetching :>> ', isFetching);
     handleFetchResult();
   }, []);
 
