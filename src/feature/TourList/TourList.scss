@@ -48,4 +48,13 @@
     height: 36px;
     background-color: #f5f5f5;
   }
+
+  .all-card-list {
+    height: 450px;
+    overflow-y: auto;
+  }
+
+  .all-card-list .list-title {
+    margin-top: 12px;
+  }
 }

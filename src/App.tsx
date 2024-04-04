@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Popover } from 'antd';
+import { Popover, Carousel } from 'antd';
 import { ConcernForm } from './widget';
 import { ChatFloatButton } from './entities/ChatFloatButton/ChatFloatButton';
 import './App.scss';
@@ -9,16 +9,18 @@ export const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Popover
-      open={open}
-      trigger='click'
-      className='ONLY CONTENT'
-      content={<ConcernForm handleClose={() => setOpen(false)} />}
-      onOpenChange={(open) => setOpen(open)}
-      rootClassName='concern-chat-popover'
-    >
-      <ChatFloatButton />
-    </Popover>
+    <>
+      <Popover
+        open={open}
+        trigger='click'
+        className='ONLY CONTENT'
+        content={<ConcernForm handleClose={() => setOpen(false)} />}
+        onOpenChange={(open) => setOpen(open)}
+        rootClassName='concern-chat-popover'
+      >
+        <ChatFloatButton />
+      </Popover>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import { useTSelector } from '../../shared/hooks/useTSelector';
 import { concernSliceActions } from '../../model/concernSlice';
 import { ConcernStateType } from '../../model/concernSlice';
 import { CalendarProps } from 'antd';
+import { AskLingvoController } from '../../network/controllers/AskLingvoController';
 
 type ConcernViewModelType = {
   currentStep: ConcernStateType['currentStep'];
@@ -22,7 +23,7 @@ type ConcernViewModelType = {
   handleChangeDatePromt(text: string): void;
   handleSelectCommunityTag(text: string): void;
   handleUnselectCommunityTag(text: string): void;
-  fetchTheSelection(): void;
+  fetchTheSelection(): ReturnType<AskLingvoController['askModel']>;
   handleChangeCommunityPromt(text: string): void;
 };
 
@@ -39,6 +40,8 @@ const {
   deleteCommunityTag,
   setCommunityPromt,
 } = concernSliceActions;
+
+const askLingvoController = new AskLingvoController();
 
 export const ConcernFormViewModel = ({ children }: { children: ReactNode }) => {
   const currentStep = useTSelector((state) => state.concern.currentStep);
@@ -90,17 +93,13 @@ export const ConcernFormViewModel = ({ children }: { children: ReactNode }) => {
     dispatch(setCommunityPromt(text));
   };
 
-  const fetchTheSelection = () => {
-    dispatch(setCurrentStep('result-page'));
+  const fetchTheSelection = async () => {
+    const concernTagsString = checkedConcernTags.join(' ');
+    const communityTagsString = communityTags.join(' ');
 
-    console.log('payload :>> ', {
-      checkedConcernTags,
-      interestPromt,
-      date,
-      datePromt,
-      communityTags,
-      communityPromt,
-    });
+    const promt = `${concernTagsString} ${interestPromt} ${communityTagsString} ${communityPromt}`;
+
+    return await askLingvoController.askModel(promt);
   };
 
   return (

@@ -16,7 +16,6 @@ export const CommunitySelector = () => {
     handleSelectCommunityTag,
     handleUnselectCommunityTag,
     handleChangeCommunityPromt,
-    fetchTheSelection,
   } = useConcernFormViewModel();
 
   const handleGaBackToTags = () => {
@@ -25,6 +24,10 @@ export const CommunitySelector = () => {
 
   const handleGoBackToDate = () => {
     handleSelectStep('select-date');
+  };
+
+  const handleGoResultPage = () => {
+    handleSelectStep('result-page');
   };
 
   const handleClickCommunityTag = (tag: string) => {
@@ -90,7 +93,7 @@ export const CommunitySelector = () => {
           onChange: handleTypeCommunityPromt,
         }}
         buttonProps={{
-          onClick: fetchTheSelection,
+          onClick: handleGoResultPage,
         }}
       />
     </div>

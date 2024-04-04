@@ -14,6 +14,7 @@ export const ChatFloatButton = (props: FloatButtonProps) => {
       }
       className='chat-float-btn'
       title='gdsg'
+      shape='square'
       body={<>gdgdsgsd</>}
     />
   );
