@@ -13,8 +13,6 @@ type SaleCardProps = {
 };
 
 export const SaleCard = ({ imgUrl, title, address, price, cardUrl }: SaleCardProps) => {
-  console.log('cardUrl :>> ', cardUrl);
-
   return (
     <div className='sale-card'>
       <div className='card-avatar'>
@@ -23,10 +21,14 @@ export const SaleCard = ({ imgUrl, title, address, price, cardUrl }: SaleCardPro
       <div className='card-body'>
         <h4 className='card-title'>
           <a href={cardUrl} target='_blank'>
-            {title}
+            {title.slice(0, 50)}
+            {title.length > 50 && '...'}
           </a>
         </h4>
-        <h5>{address.slice(0, 30)}</h5>
+        <h5>
+          {address.slice(0, 30)}
+          {address.length > 30 && '...'}
+        </h5>
         <div className='card-action-panel'>
           <Button type='text' className='sale-btn'>
             от {price}
