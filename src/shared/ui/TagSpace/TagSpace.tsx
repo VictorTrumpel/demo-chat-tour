@@ -1,4 +1,5 @@
 import { Tag } from 'antd';
+
 import './TagSpace.scss';
 
 type TagSpaceProps = {

@@ -3,6 +3,7 @@ import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput
 import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormViewModel';
 import { Calendar } from '../../shared/ui/Calendar/Calendar';
 import { InputProps } from 'antd';
+import { TypeAnimation } from 'react-type-animation';
 //@ts-ignore
 import dayjs from 'dayjs';
 import './DateSelector.scss';
@@ -46,7 +47,9 @@ export const DateSelector = () => {
       <div className='divider' />
 
       <div className='calendar-info-container'>
-        <h4>Подскажите дату</h4>
+        <h4>
+          <TypeAnimation sequence={['Подскажите дату']} cursor={false} />
+        </h4>
         <h5>А еще можете уточнить время в сообщении</h5>
       </div>
 

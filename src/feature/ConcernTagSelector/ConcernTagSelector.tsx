@@ -3,6 +3,7 @@ import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormView
 import { interests } from '../../shared/constants/interests';
 import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput';
 import { TagSpace } from '../../shared/ui/TagSpace/TagSpace';
+import { TypeAnimation } from 'react-type-animation';
 import './ConcernTagSelector.scss';
 
 const tags = interests.map((t) => t.label);
@@ -38,7 +39,12 @@ export const ConcernTagSelector = () => {
 
   return (
     <div className='concern-space concern-form-space'>
-      <h4>Интересует что-то конкретное?</h4>
+      <h4>
+        <TypeAnimation
+          sequence={['Интересует', 10, 'Интересует что-то конкретное?']}
+          cursor={false}
+        />
+      </h4>
       <h5>Можно выбать несколько вариантов или написать самостоятельно</h5>
 
       <TagSpace checkedTags={checkedConcernTags} tags={tags} handleClickTag={handleClickTag} />

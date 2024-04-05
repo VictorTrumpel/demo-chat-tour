@@ -14,6 +14,7 @@ export const App = () => {
         open={open}
         trigger='click'
         className='ONLY CONTENT'
+        //destroyTooltipOnHide={true}
         content={<ConcernForm handleClose={() => setOpen(false)} />}
         onOpenChange={(open) => setOpen(open)}
         rootClassName='concern-chat-popover'

@@ -3,6 +3,7 @@ import { useConcernFormViewModel } from '../ConcernFormViewModel/ConcernFormView
 import { NextSubmitInput } from '../../shared/ui/NextSubmitInput/NextSubmitInput';
 import { communities } from '../../shared/constants/communities';
 import { InputProps } from 'antd';
+import { TypeAnimation } from 'react-type-animation';
 import './CommunitySelector.scss';
 
 export const CommunitySelector = () => {
@@ -74,7 +75,9 @@ export const CommunitySelector = () => {
 
       <div className='divider' />
 
-      <h4 className='whom-ask'>А с кем пойдете?</h4>
+      <h4 className='whom-ask'>
+        <TypeAnimation sequence={['А с кем пойдете?']} cursor={false} />
+      </h4>
 
       <div className='community-tags-container'>
         <TagSpace

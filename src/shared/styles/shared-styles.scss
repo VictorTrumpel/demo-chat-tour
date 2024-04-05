@@ -6,11 +6,22 @@
   padding: 3px 8px;
   cursor: pointer;
   display: block;
+  animation-name: show-concern-tag;
+  animation-duration: 1s;
 
   &.ant-tag-processing {
     color: black;
     background-color: #ffeb99;
     border-color: #e5b900;
+  }
+}
+
+@keyframes show-concern-tag {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
